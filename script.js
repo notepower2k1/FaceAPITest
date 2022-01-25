@@ -26,9 +26,9 @@ async function loadTrainingData(){
 let faceMatcher
 async function init() {
 	await Promise.all([
-		faceapi.loadSsdMobilenetv1Model('/models'),
-		faceapi.loadFaceRecognitionModel('/models'),
-		faceapi.loadFaceLandmarkModel('/models'),
+		faceapi.nets.ssdMobilenetv1.loadFromUri('/models'),
+		faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+		faceapi.nets.faceRecognitionNet.loadFromUri('/models')
 	])
 
 
