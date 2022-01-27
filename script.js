@@ -9,7 +9,7 @@ async function loadTrainingData(){
 	for (const label of labels) {
 		const descriptors = []
 		for (let i = 0; i <= 27; i++) {
-			const image = await faceapi.fetchImage(`https://notepower2k1.github.io/FaceAPITest/data/${label}/${i}.jpg`)
+			const image = await faceapi.fetchImage(`/FaceAPITest/data/${label}/${i}.jpg`)
 			const detection = await faceapi.detectSingleFace(image).withFaceLandmarks().withFaceDescriptor()
 			descriptors.push(detection.descriptor)
 		}
