@@ -30,7 +30,7 @@ var myInt = {
 	mode:'cors',
 	cache:'default'
 };
-let myRequest = new Request("/TwiceFaceApi/data.json",myInt);
+let myRequest = new Request("/FaceAPITest/data.json",myInt);
 
 
 let faceMatcher
