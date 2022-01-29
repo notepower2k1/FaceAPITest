@@ -22,6 +22,16 @@ async function loadTrainingData(){
 	return faceDescriptors
 }
 
+var myInt = {
+	method: "GET",
+	headers: {
+		'Content-Type': 'application/json'
+	},
+	mode:'cors',
+	cache:'default'
+};
+let myRequest = new Request("/TwiceFaceApi/data.json",myInt);
+
 
 let faceMatcher
 async function init() {
@@ -36,11 +46,20 @@ async function init() {
 		text: "Loading data successfully!",
 	}).showToast();
 
-	const trainingData = await loadTrainingData()
-	faceMatcher = new faceapi.FaceMatcher(trainingData, 0.7)
-    
-    document.querySelector('.container-loading').style.display = 'none';
-    document.querySelector('#wrapper').style.display = 'block';
+	fetch(myRequest)
+	.then(function (response) {
+		return response.json();
+		
+	}).then(function (data){
+		
+
+		var labeledFaceDescriptors = data.map(x=>faceapi.LabeledFaceDescriptors.fromJSON(x));
+		console.log(labeledFaceDescriptors);
+
+		faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
+		document.querySelector('.container-loading').style.display = 'none';
+		document.querySelector('#wrapper').style.display = 'block';
+	});
 }
 
 init()
